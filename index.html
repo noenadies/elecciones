@@ -335,7 +335,14 @@ z-index: 7;
 
 
 
+#idppararegis{
 
+	position: absolute;
+	top:80;
+	left: 45%;
+	color: #000000;
+	font-size: 17px;
+}
 
 
 
@@ -360,7 +367,10 @@ z-index: 7;
 	</head>
 	<body>
 		<script src=""></script>
+
+	
 		<div id="iddivinicio"></div>
+
 		<div id="menulateral1">
 	
 				<p  id="idlabecedula" >Cedula:</p>  <input   id="idedtextcedula"  type="text" name="fname">
@@ -376,7 +386,7 @@ z-index: 7;
 		</div>
 		<div id="countdown"></div>
 		<div id="idTitulo">Elecciones 2019</div>
-	
+		<p id="idppararegis">Inicio para  registrar</p>
 
 			<button id="idbtirmunuhome" onclick="btmenulateral1();" type="button">Inicio</button>
 
@@ -463,6 +473,9 @@ function getval(st){
 return	document.getElementById(st).value;
 }
 
+function setval(st,vl){
+document.getElementById(st).value=vl;
+}
 
 
 function getvalores(){
@@ -490,6 +503,36 @@ firebase.database().ref().child("cosas").push(persona);
 function dbtregistrar(){
 
 	getvalores();
+	setTimeout(function(){
+	limpiar();
+},2000);
+}
+
+
+
+function limpiar(){
+
+
+	setval("idedtextcedula","");
+	setval("idedtextNombre","");
+	setval("idedtextCelular","");
+	setval("idedtextLocalidad","");
+	setval("idedtextDireccion","");
+	setval("idedtextMesa","");
+	setval("idedtextReferido","");
+	setval("idedtextEmail","");
+menu();
+}
+
+function setinner(st,vl){
+	document.getElementById(st).innerHTML=String(vl);
+}
+
+function menu(){
+	oculta("menulateral1");
+
+	
+	setinner("idppararegis","registrado");
 }
 		</script>
 
