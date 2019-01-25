@@ -302,8 +302,61 @@ z-index: 7;
 
 
 
+#idbtregistrar {
+	
+	-moz-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	-webkit-box-shadow: 0px 1px 0px 0px #f0f7fa;
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #277a96), color-stop(1, #0a5e7a));
+	background:-moz-linear-gradient(top, #277a96 5%, #0a5e7a 100%);
+	background:-webkit-linear-gradient(top, #277a96 5%, #0a5e7a 100%);
+	background:-o-linear-gradient(top, #277a96 5%, #0a5e7a 100%);
+	background:-ms-linear-gradient(top, #277a96 5%, #0a5e7a 100%);
+	background:linear-gradient(to bottom, #277a96 5%, #0a5e7a 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#277a96', endColorstr='#0a5e7a',GradientType=0);
+	background-color:#277a96;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:32px 20px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #5b6178;
+
+	position: absolute;
+	top: 10%;
+	left: 74%;
+}
+
+
+
+
+
+
+
+
+
 
 		</style>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDFr709BqeySGzt63KugXZ9cCpC-8V5qY4",
+    authDomain: "elecciones-b3e1c.firebaseapp.com",
+    databaseURL: "https://elecciones-b3e1c.firebaseio.com",
+    projectId: "elecciones-b3e1c",
+    storageBucket: "elecciones-b3e1c.appspot.com",
+    messagingSenderId: "177506121919"
+  };
+  firebase.initializeApp(config);
+</script>
 	</head>
 	<body>
 		<script src=""></script>
@@ -318,7 +371,7 @@ z-index: 7;
 				<p  id="idlabeMesa" >Mesa:</p>  <input   id="idedtextMesa"  type="text" name="fname">
 				<p  id="idlabeReferido" >Referido:</p>  <input   id="idedtextReferido"  type="text" name="fname">
 				<p  id="idlabeEmail" >Email:</p>  <input   id="idedtextEmail"  type="text" name="fname">
-	
+				<button id="idbtregistrar" onclick="dbtregistrar();" type="button">registrar</button>
 	
 		</div>
 		<div id="countdown"></div>
@@ -396,8 +449,48 @@ var end = new Date('10/27/2019 4:00 PM');
 	function mostrar(st){
 		document.getElementById(st).style.display="block";
 	}
+var  persona;
+	
+var cdla="";
+	var nm="";
+	var cl="";
+	var lca="";
+	var dc="";
+	var ms="";
+	var rf="";
+	var em="";
+function getval(st){
+return	document.getElementById(st).value;
+}
 
-		
+
+
+function getvalores(){
+ cdla=getval("idedtextcedula");
+	 nm=getval("idedtextNombre");
+cl=getval("idedtextCelular");
+lca=getval("idedtextLocalidad");
+dc=getval("idedtextDireccion");
+ ms=getval("idedtextMesa");
+ rf=getval("idedtextReferido");
+em=getval("idedtextEmail");
+
+
+
+
+llenaregistro(cdla,nm,cl,lca,dc,ms, rf,em);
+
+
+}
+function llenaregistro(cedula,nombre,celular,localidad,direcc,mesa, referido,emeail){
+persona={cedula:cedula,nombre:nombre,celular:celular,localidad:localidad,direcc:direcc,mesa:mesa, referido:referido,emeail:emeail};
+
+firebase.database().ref().child("cosas").push(persona);
+}
+function dbtregistrar(){
+
+	getvalores();
+}
 		</script>
 
 	</body>
